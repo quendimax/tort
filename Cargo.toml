@@ -1,0 +1,30 @@
+[package]
+name = "tort"
+version = "0.1.0"
+edition = "2021"
+authors = ["Maksim Tomkavich"]
+license = "GPL-2.0-or-later"
+
+[dependencies]
+clap = { version = "4", features = ["derive", "cargo"] }
+clap_derive = "4"
+colored = "2.1"
+logos = { git = "https://github.com/maciejhirsz/logos.git", rev = "640882a0351f76803787153f863fcbd725fd3395" }
+miette = { version = "7.2", features = ["fancy"] }
+prettydiff = "0.7"
+rand = "0.8"
+rustyline = "14.0"
+thiserror = "1"
+
+[dev-dependencies]
+pretty_assertions = "1.4"
+
+[profile.production]
+inherits = "release"
+codegen-units = 1
+debug = false
+lto = true
+strip = "debuginfo"
+
+[package.metadata.packager]
+before-packaging-command = "cargo build --profile production"
